@@ -1,4 +1,6 @@
-import { addComment } from './render.js'
+// js/form.js
+import { comments } from './data.js'
+import { renderComments } from './render.js'
 
 /**
  * Навешивает обработчик на кнопку «Написать».
@@ -10,13 +12,24 @@ import { addComment } from './render.js'
  */
 export function initForm({ container, button, nameInput, textInput }) {
   button.addEventListener('click', () => {
-    addComment(container, {
-      name: nameInput.value,
-      date: new Date().toLocaleString(),
-      text: textInput.value,
+    const author = nameInput.value.trim()
+    const text = textInput.value.trim()
+
+    if (!author || !text) return
+
+    // 1. Меняем массив
+    comments.push({
+      author,
+      date: new Date().toLocaleString('ru-RU'),
+      text,
       likes: 0,
+      isLiked: false,
     })
 
+    // 2. Перерисовываем весь список из массива
+    renderComments(container, comments)
+
+    // 3. Чистим форму
     nameInput.value = ''
     textInput.value = ''
   })

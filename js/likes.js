@@ -1,15 +1,25 @@
+// js/likes.js
+import { comments } from './data.js'
+import { renderComments } from './render.js'
+
 /**
  * Навешивает делегированный обработчик кликов по лайкам.
- * @param {HTMLElement} container - элемент, внутри которого лежат .like-button
+ * @param {HTMLElement} container - список комментариев
  */
 export function initLikes(container) {
   container.addEventListener('click', (event) => {
-    if (!event.target.matches('.like-button')) return
+    const btn = event.target.closest('.like-button')
+    if (!btn) return
 
-    const btn = event.target
-    const counter = btn.closest('.likes').querySelector('.likes-counter')
-    const isActive = btn.classList.toggle('-active-like')
+    const li = btn.closest('.comment')
+    const index = Number(li.dataset.index)
+    const comment = comments[index]
 
-    counter.textContent = Number(counter.textContent) + (isActive ? 1 : -1)
+    // 1. Меняем массив
+    comment.isLiked = !comment.isLiked
+    comment.likes += comment.isLiked ? 1 : -1
+
+    // 2. Перерисовываем весь список
+    renderComments(container, comments)
   })
 }
