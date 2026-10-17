@@ -1,3 +1,4 @@
+// js/render.js
 import { escapeHtml } from './escape.js'
 
 export function renderComment({ author, date, text, likes, isLiked }, index) {

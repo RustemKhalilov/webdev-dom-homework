@@ -1,4 +1,3 @@
-// js/likes.js
 import { comments } from './data.js'
 import { renderComments } from './render.js'
 
