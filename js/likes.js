@@ -1,4 +1,4 @@
-import { comments } from './data.js'
+import { comments } from './render.js'
 import { renderComments } from './render.js'
 
 /**

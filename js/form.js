@@ -1,5 +1,6 @@
-import { comments } from './data.js'
+import { comments } from './render.js'
 import { renderComments } from './render.js'
+import { postComment } from './metodPost.js'
 
 /**
  * Навешивает обработчик на кнопку «Написать».
@@ -18,12 +19,18 @@ export function initForm({ container, button, nameInput, textInput }) {
 
     // 1. Меняем массив
     comments.push({
-      author,
-      date: new Date().toLocaleString('ru-RU'),
+      author: { name: author },
+      date: new Date().toISOString(),
       text,
       likes: 0,
       isLiked: false,
     })
+
+    // 2. Отправляем на сервер
+
+    postComment({ name: author, text })
+    console.log(author)
+    console.log(text)
 
     // 2. Перерисовываем весь список из массива
     renderComments(container, comments)

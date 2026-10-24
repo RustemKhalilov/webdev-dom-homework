@@ -1,4 +1,4 @@
-import { comments } from './data.js'
+import { comments } from './render.js'
 import { renderComments } from './render.js'
 import { initLikes } from './likes.js'
 import { initForm } from './form.js'
@@ -10,6 +10,7 @@ const nameInput = document.querySelector('.add-form-name')
 const textInput = document.querySelector('.add-form-text')
 
 // 1. Первичный рендер из массива
+console.log(comments)
 renderComments(commentBox, comments)
 
 // 2. Обработчики событий
