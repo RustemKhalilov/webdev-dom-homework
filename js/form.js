@@ -1,35 +1,41 @@
-import { comments } from './data.js'
+import { comments } from './render.js'
 import { renderComments } from './render.js'
+import { postComment } from './metodPost.js'
 
-/**
- * Навешивает обработчик на кнопку «Написать».
- * @param {Object} refs
- * @param {HTMLElement} refs.container - список комментариев
- * @param {HTMLButtonElement} refs.button
- * @param {HTMLInputElement} refs.nameInput
- * @param {HTMLTextAreaElement} refs.textInput
- */
 export function initForm({ container, button, nameInput, textInput }) {
-  button.addEventListener('click', () => {
+  button.addEventListener('click', async () => {
     const author = nameInput.value.trim()
     const text = textInput.value.trim()
 
     if (!author || !text) return
+    // если хоть одно поле пустое,
+    // выходим из обработчика, ничего не отправляем
 
-    // 1. Меняем массив
-    comments.push({
-      author,
-      date: new Date().toLocaleString('ru-RU'),
-      text,
-      likes: 0,
-      isLiked: false,
-    })
+    button.disabled = true
+    // Блокируем кнопку от двойной отправки
+    try {
+      // Отправка ожидание и в случае успеха делаем все что ниже
+      const result = await postComment({ name: author, text })
 
-    // 2. Перерисовываем весь список из массива
-    renderComments(container, comments)
+      comments.push({
+        author: { name: author },
+        date: new Date().toISOString(),
+        text,
+        likes: 0,
+        isLiked: false,
+      })
+      // Перерисовываем весь список
+      renderComments(container, comments)
 
-    // 3. Чистим форму
-    nameInput.value = ''
-    textInput.value = ''
+      nameInput.value = ''
+      textInput.value = ''
+    } catch (err) {
+      // обрабока ошибок
+      console.error('Ошибка:', err.message)
+    } finally {
+      //  FINALLY — срабатывает ВСЕГДА: и при успехе,
+      //  и при ошибке. Разблокируем кнопку
+      button.disabled = false
+    }
   })
 }

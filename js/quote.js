@@ -1,5 +1,5 @@
 // js/quote.js
-import { comments } from './data.js'
+import { comments } from './render.js'
 
 /**
  * Навешивает делегированный обработчик кликов по комментариям.
