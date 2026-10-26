@@ -27,7 +27,7 @@ export function renderComment({ author, date, text, likes, isLiked }, index) {
   return li
 }
 
-export const comments = await fetchComments()
+export const comments = fetchComments()
 console.log(comments)
 console.log(comments[0])
 
