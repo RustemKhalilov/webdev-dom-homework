@@ -17,7 +17,9 @@ export function initForm({ container, button, nameInput, textInput }) {
       // Отправка ожидание и в случае успеха делаем все что ниже
       const result = await postComment({ name: author, text })
 
-      comments.push({
+      const list = await comments //  comments — промис, ждём массив
+
+      list.push({
         author: { name: author },
         date: new Date().toISOString(),
         text,
@@ -25,7 +27,7 @@ export function initForm({ container, button, nameInput, textInput }) {
         isLiked: false,
       })
       // Перерисовываем весь список
-      renderComments(container, comments)
+      renderComments(container, list)
 
       nameInput.value = ''
       textInput.value = ''
