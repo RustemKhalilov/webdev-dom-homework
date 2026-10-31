@@ -8,6 +8,17 @@ export function initForm({ container, button, nameInput, textInput }) {
     const text = textInput.value.trim()
 
     if (!author || !text) return
+
+    if (author.length <= 1) {
+      alert('В поле имя должно быть более одного символа')
+      return
+    }
+
+    if (text.length <= 1) {
+      alert('В поле текст должно быть более одного символа')
+      return
+    }
+
     // если хоть одно поле пустое,
     // выходим из обработчика, ничего не отправляем
 
