@@ -5,14 +5,31 @@ export async function fetchComments() {
     )
 
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      if (response.status === 500) {
+        throw new Error('Сервер сломался')
+      } else if (response.status === 400) {
+        throw new Error('Плохой запрос')
+      } else {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
     }
 
     const commentJSON = await response.json()
-    return commentJSON.comments // ← возвращаем, а не только логируем
+    return commentJSON.comments
   } catch (error) {
-    console.error('Не удалось загрузить комментарии:', error.message)
-    return [] // чтобы вызывающий код не получил undefined
+    if (error instanceof TypeError) {
+      // сюда попадают: нет сети, сервер недоступен, CORS, блокировка
+      alert(
+        'Не удалось связаться с сервером. Проверь подключение к интернету и попробуй снова.',
+      )
+    } else if (error.message === 'Сервер сломался') {
+      alert('Сервер сломался, попробуй позже')
+    } else if (error.message === 'Плохой запрос') {
+      alert('Ты сделал ошибку в запросе, исправь данные и попробуй снова')
+    } else {
+      console.error('Ошибка:', error.message)
+    }
+    throw error // Пробрасываем ошибку дальше
   }
 }
 

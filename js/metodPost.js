@@ -9,15 +9,30 @@ export async function postComment({ name, text }) {
     )
 
     if (!response.ok) {
-      const errorBody = await response.text()
-      console.error('Тело ответа сервера:', errorBody)
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      if (response.status === 500) {
+        throw new Error('Сервер сломался')
+      } else if (response.status === 400) {
+        throw new Error('Плохой запрос')
+      } else {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
     }
 
     const commentJSON = await response.json()
     return commentJSON
   } catch (error) {
-    console.error('Не удалось отправить комментарий:', error.message)
-    throw new Error(error.message) // ← null, а не [], чтобы вызывающий код отличил успех от провала
+    if (error instanceof TypeError) {
+      // сюда попадают: нет сети, сервер недоступен, CORS, блокировка
+      alert(
+        'Не удалось связаться с сервером. Проверь подключение к интернету и попробуй снова.',
+      )
+    } else if (error.message === 'Сервер сломался') {
+      alert('Сервер сломался, попробуй позже')
+    } else if (error.message === 'Плохой запрос') {
+      alert('Ты сделал ошибку в запросе, исправь данные и попробуй снова')
+    } else {
+      console.error('Ошибка:', error.message)
+    }
+    throw error // Пробрасываем ошибку дальше
   }
 }
