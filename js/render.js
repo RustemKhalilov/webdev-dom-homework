@@ -27,10 +27,6 @@ export function renderComment({ author, date, text, likes, isLiked }, index) {
   return li
 }
 
-export const comments = fetchComments()
-console.log(comments)
-console.log(comments[0])
-
 export function renderComments(container, comments) {
   console.log(comments)
   container.innerHTML = ''

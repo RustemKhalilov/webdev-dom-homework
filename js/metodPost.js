@@ -1,10 +1,14 @@
-export async function postComment({ name, text }) {
+export async function postComment({ name, text, token }) {
   try {
     for (let i = 1; i <= 3; i++) {
       const response = await fetch(
-        'https://wedev-api.sky.pro/api/v1/Khalilov-Rustem/comments',
+        'https://wedev-api.sky.pro/api/v2/Khalilov-Rustem/comments',
         {
           method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+
           body: JSON.stringify({ name, text }),
         },
       )

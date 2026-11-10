@@ -1,11 +1,6 @@
-import { comments } from './render.js'
 import { renderComments } from './render.js'
 
-/**
- * Навешивает делегированный обработчик кликов по лайкам.
- * @param {HTMLElement} container - список комментариев
- */
-export function initLikes(container) {
+export function initLikes(container, comments) {
   container.addEventListener('click', (event) => {
     const btn = event.target.closest('.like-button')
     if (!btn) return
@@ -13,12 +8,11 @@ export function initLikes(container) {
     const li = btn.closest('.comment')
     const index = Number(li.dataset.index)
     const comment = comments[index]
+    if (!comment) return
 
-    // 1. Меняем массив
     comment.isLiked = !comment.isLiked
     comment.likes += comment.isLiked ? 1 : -1
 
-    // 2. Перерисовываем весь список
     renderComments(container, comments)
   })
 }
