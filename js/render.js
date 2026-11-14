@@ -1,6 +1,5 @@
 // js/render.js
 import { escapeHtml } from './escape.js'
-import { fetchComments } from './metodGet.js'
 import { formatDate } from './convertdate.js'
 
 export function renderComment({ author, date, text, likes, isLiked }, index) {

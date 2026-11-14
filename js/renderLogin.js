@@ -35,6 +35,7 @@ export const renderLogin = () => {
       password: passwordElement.value,
     }).then((data) => {
       updateToken(data.user.token)
+      localStorage.setItem('userName', data.user.name) //Записали имя в временную папку
       location.reload() // ← перезапускаем main.js с токеном
     })
   })

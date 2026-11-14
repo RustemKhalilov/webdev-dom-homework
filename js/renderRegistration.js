@@ -36,6 +36,7 @@ export const renderRegistration = () => {
       password: passwordElement.value,
     }).then((data) => {
       updateToken(data.user.token)
+      localStorage.setItem('userName', data.user.name) //Записали имя на жеский диск
       location.reload() // ← перезапускаем main.js с токеном
     })
   })

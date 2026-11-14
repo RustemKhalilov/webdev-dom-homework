@@ -12,6 +12,13 @@ const commentBox = document.querySelector('.comments')
 const button = document.querySelector('.add-form-button')
 const nameInput = document.querySelector('.add-form-name')
 const textInput = document.querySelector('.add-form-text')
+//Делеаем кноку только для чтения
+
+const currentUserName = localStorage.getItem('userName')
+if (currentUserName) {
+  nameInput.value = currentUserName
+}
+nameInput.readOnly = true
 
 //получили объект из DOM
 const loginBtn = document.querySelector('.login')

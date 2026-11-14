@@ -178,6 +178,7 @@ body {
 .add-form-name {
   width: 300px;
   padding: 11px 22px;
+  background-color: rgb(182, 180, 180);
 }
 
 .add-form-text {

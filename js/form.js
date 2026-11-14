@@ -19,12 +19,12 @@ export function initForm({ container, button, nameInput, textInput }) {
 
     if (!author || !text) return
 
-    if (author.length <= 3) {
+    if (author.length <= 2) {
       alert('В поле имя должно быть не менее 3-х символов')
       return
     }
 
-    if (text.length <= 3) {
+    if (text.length <= 2) {
       alert('В поле имя должно быть не менее 3-х символов')
       return
     }
