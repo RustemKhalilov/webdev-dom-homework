@@ -2,6 +2,58 @@ body {
   margin: 0;
 }
 
+.header {
+  display: flex;
+  width: 596px;
+  margin-bottom: 30px;
+  gap: 30px;
+  justify-content: flex-end;
+}
+
+.login {
+  font-size: 18px;
+  color: #ffffff;
+  width: 150px;
+  border-radius: 15px;
+  background: radial-gradient(
+    75.42% 75.42% at 50% 42.37%,
+    rgba(53, 53, 53, 0) 22.92%,
+    #7334ea 100%
+  );
+}
+
+.form-title {
+  font-size: 18px;
+}
+
+.input {
+  font-size: 16px;
+  border-radius: 15px;
+}
+
+.button {
+  font-size: 15px;
+  color: #ffffff;
+  border-radius: 12px;
+  background: radial-gradient(
+    75.42% 75.42% at 50% 42.37%,
+    rgba(53, 53, 53, 0) 22.92%,
+    #7334ea 100%
+  );
+}
+
+.registration {
+  font-size: 18px;
+  color: #ffffff;
+  width: 250px;
+  border-radius: 15px;
+  background: radial-gradient(
+    75.42% 75.42% at 50% 42.37%,
+    rgba(53, 53, 53, 0) 22.92%,
+    #7334ea 100%
+  );
+}
+
 .container {
   font-family: Helvetica;
   color: #ffffff;
@@ -126,6 +178,7 @@ body {
 .add-form-name {
   width: 300px;
   padding: 11px 22px;
+  background-color: rgb(182, 180, 180);
 }
 
 .add-form-text {

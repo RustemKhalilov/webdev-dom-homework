@@ -1,5 +1,4 @@
 // js/quote.js
-import { comments } from './render.js'
 
 /**
  * Навешивает делегированный обработчик кликов по комментариям.
@@ -7,8 +6,9 @@ import { comments } from './render.js'
  * @param {Object} refs
  * @param {HTMLElement} refs.container - список комментариев
  * @param {HTMLTextAreaElement} refs.textInput - поле, куда вставляем текст
+ * @param {Array} refs.comments - массив комментариев (передаём из main.js)
  */
-export function initQuote({ container, textInput }) {
+export function initQuote({ container, textInput, comments }) {
   container.addEventListener('click', (event) => {
     // 1. Клик по кнопке лайка — не цитируем
     if (event.target.closest('.like-button')) return

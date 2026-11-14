@@ -2,7 +2,7 @@ export async function fetchComments() {
   try {
     for (let i = 1; i <= 3; i++) {
       const response = await fetch(
-        'https://wedev-api.sky.pro/api/v1/Khalilov-Rustem/comments',
+        'https://wedev-api.sky.pro/api/v2/Khalilov-Rustem/comments',
       )
 
       // успех — возвращаем массив комментариев
